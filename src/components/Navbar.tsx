@@ -8,7 +8,7 @@ import {
     UserButton,
   } from '@clerk/nextjs'
 
-export default function(){
+export default function Navbar(){
     return(
         <div className='w-screen text-sky-300 h-20  bg-gradient-to-b from-slate-950  to-slate-900'>
             <nav className='flex justify-between h-full  px-2 sm:px-4 md:px-6 w-11/12 mx-auto items-center'>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaMusic } from "react-icons/fa";
 
 
-export default function(){
+export default function Footer(){
     return(
         <footer className="w-full border-t border-slate-700 bg-gradient-to-b from-slate-900 text-slate-400  to-slate-800 py-12">
         <div className="container w-11/12 sm:w-4/5 md:2/3 px-4 py-2 mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-4">

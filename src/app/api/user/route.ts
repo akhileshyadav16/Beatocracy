@@ -9,7 +9,7 @@ export async function POST() {
             return NextResponse.json({ message: "No User" }, { status: 401 });
         }
 
-        let existingUser = await prisma.user.findUnique({
+        const existingUser = await prisma.user.findUnique({
             where: { id: user.id },
         });
 

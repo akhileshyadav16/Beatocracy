@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod"
 import { prisma } from "@/lib/db";
-import youtubesearchapi from "youtube-search-api" ;
+import youtubesearchapi from "youtube-search-api";
 import { auth } from "@clerk/nextjs/server";
 
 
@@ -104,15 +104,26 @@ export async function GET(req: NextRequest) {
           },
         },
       });
+
+      const current = await prisma.currentStream.findFirst({
+        where: { creatorId },
+        include: {
+          stream: true,
+        },
+      })
   
       return NextResponse.json({
         streams: streams.map(({ _count, upvote, ...rest }) => ({
           ...rest,
           upvotes: _count.upvote,
-          haveVoted: upvote.length > 0, 
+          haveVoted: upvote.length > 0,
         })),
-      });
+        current
+      },
+
+    );
     } catch (err) {
+      console.log(err)
       return NextResponse.json(
         { message: "Error in fetching Streams" },
         { status: 500 }
