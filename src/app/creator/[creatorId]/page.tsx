@@ -1,5 +1,11 @@
 import StreamView from "@/components/StreamView";
 
-export default function CreatorPage({ params }: { params: { creatorId: string } }) {
+interface CreatorPageProps {
+  params: {
+    creatorId: string;
+  };
+}
+
+export default async function CreatorPage({ params }: CreatorPageProps) {
   return <StreamView creatorId={params.creatorId} />;
 }
