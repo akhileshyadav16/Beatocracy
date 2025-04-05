@@ -1,4 +1,5 @@
 "use client";
+
 import "./loader.css";
 import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
 import { useState, useEffect } from "react";
