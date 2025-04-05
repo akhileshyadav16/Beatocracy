@@ -4,7 +4,7 @@ import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
 import { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import toast from "react-hot-toast";
-import { IoShareSocialOutline } from "react-icons/io5";
+import { FaShareSquare } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
 interface VideoItem {
@@ -50,7 +50,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
           id: stream.id,
           title: stream.title || `YouTube Video ${stream.extractedId}`,
           thumbnail: stream.smallImage || `https://img.youtube.com/vi/$${stream.extractedId}/mqdefault.jpg`,
-          votes: stream.votes || 0,
+          votes: stream.upvotes || 0,
           url: stream.url,
           haveVoted: stream.haveVoted,
           userId: stream.userId,
@@ -91,7 +91,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
     callApi();
     const interval = setInterval(() => {
       fetchStreams();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [currentVideoId]);
@@ -129,7 +129,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
         });
       }
     };
-  }, [currentVideo, creatorId, currentStream]);
+  }, [currentVideo, creatorId]);
 
   useEffect(() => {
     if (!currentVideo && queue.length > 0) {
@@ -272,13 +272,13 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
 
         <button
           onClick={handleShareLink}
-          className="px-2 my-4 cursor-pointer text-lg font-semibold py-2 w-fit h-10 bg-blue-700 rounded-md"
+          className="px-4 my-4 cursor-pointer font-medium py-1 w-fit h-10 bg-sky-600 duration-200 hover:bg-sky-500 rounded-md"
         >
-          <IoShareSocialOutline className="inline font-semibold h-9 w-9 px-2 pb-2" />
-          Share
+        Copy and Share
+        <FaShareSquare className="inline w-5 h-5 ml-2 "/>
         </button>
 
-        <div className="mb-10 flex flex-col items-center w-full">
+        <div className="my-10 flex flex-col items-center w-full">
           <h2 className="text-3xl text-center text-slate-400 font-bold mb-4">Now Playing</h2>
           <div className="w-full rounded-lg flex justify-center">
             {currentVideo ? (
