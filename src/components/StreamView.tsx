@@ -18,6 +18,7 @@ interface VideoItem {
   userId: string;
   extractedId?: string;
   smallImage?: string;
+  upvotes : number
 }
 
 export default function StreamView({ creatorId }: { creatorId: string }) {
