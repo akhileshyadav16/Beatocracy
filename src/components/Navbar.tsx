@@ -1,5 +1,4 @@
 import { FaMusic } from "react-icons/fa";
-
 import {
     SignInButton,
     SignUpButton,
@@ -7,6 +6,7 @@ import {
     SignedOut,
     UserButton,
   } from '@clerk/nextjs'
+
 
 export default function Navbar(){
     return(

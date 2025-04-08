@@ -35,7 +35,7 @@ export default function Home() {
             <Link href={"/dashboard"}>Become a creator</Link>
             </button>
             <button className="w-fit h-12 px-5 py-2 cursor-pointer rounded-sm border-2 border-slate-700 bg-slate-900 hover:bg-slate-800 duration-300">
-              <Link href={"/dashboard"}>Explore more</Link>
+              <Link href={"/Explore"}>Explore more</Link>
             </button>
           </div>
         </div>

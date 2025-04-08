@@ -2,7 +2,7 @@
 
 import "./loader.css";
 import { CiSquareChevDown, CiSquareChevUp } from "react-icons/ci";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import YouTube from "react-youtube";
 import toast from "react-hot-toast";
 import { FaShareSquare } from "react-icons/fa";
@@ -18,7 +18,8 @@ interface VideoItem {
   userId: string;
   extractedId?: string;
   smallImage?: string;
-  upvotes : number
+  bigImage?: string;
+  upvotes: number;
 }
 
 export default function StreamView({ creatorId }: { creatorId: string }) {
@@ -57,9 +58,11 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
           haveVoted: stream.haveVoted,
           userId: stream.userId,
           extractedId: stream.extractedId,
+          smallImage: stream.smallImage,
+          bigImage : stream.bigImage
         }));
 
-        setCurrentStream(data.current.stream);
+        setCurrentStream(data.current);
 
         const filteredQueue = formattedQueue.filter((video: VideoItem) => {
           if (!currentVideoId) return true;
@@ -96,7 +99,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [currentVideoId]);
+  }, [currentVideoId, creatorId]);
 
   useEffect(() => {
     const trackCurrentStream = async () => {
@@ -116,7 +119,10 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
       }
     };
 
-    trackCurrentStream();
+    if (currentVideo) {
+      trackCurrentStream();
+    }
+
     return () => {
       if (currentVideo) {
         fetch("/api/streams/current-stream", {
@@ -143,7 +149,12 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
         return sortedQueue.slice(1);
       });
     }
-  }, [currentVideo, queue]);
+
+    if (currentStream && !currentVideo) {
+      setCurrentVideo(currentStream);
+    }
+
+  }, [currentVideo, queue, currentStream]);
 
   const handleVote = async (id: string, increment: number) => {
     try {
@@ -276,8 +287,8 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
           onClick={handleShareLink}
           className="px-4 my-4 cursor-pointer font-medium py-1 w-fit h-10 bg-sky-600 duration-200 hover:bg-sky-500 rounded-md"
         >
-        Copy and Share
-        <FaShareSquare className="inline w-5 h-5 ml-2 "/>
+          Copy and Share
+          <FaShareSquare className="inline w-5 h-5 ml-2 " />
         </button>
 
         <div className="my-10 flex flex-col items-center w-full">
@@ -296,17 +307,15 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
                   onEnd={handleVideoEnd}
                 />
               ) : (
-                <div key={currentStream?.id} className="flex w-2/5 items-center gap-4 bg-slate-950 p-3 rounded-lg">
+                <div key={currentStream?.id} className="flex flex-col w-2/5 items-center gap-4 bg-slate-950 p-3 rounded-lg">
+                  <img
+                    src={currentStream?.bigImage || "/placeholder.svg"}
+                    alt={currentStream?.title || "Video"}
+                    className="w-fit h-fit object-cover rounded"
+                  />
                   <div className="flex items-center gap-1 min-w-[60px]">
                     <div className="text-slate-300 loader"></div>
-                  </div>
-                  <img
-                    src={currentStream?.smallImage || "/placeholder.svg"}
-                    alt={currentStream?.title || "Video"}
-                    className="w-24 h-18 object-cover rounded"
-                  />
-                  <div className="flex-1 text-left">
-                    <h3 className="font-medium line-clamp-2">{currentStream?.title}</h3>
+                    <h3 className="font-medium px-2 line-clamp-2">{currentStream?.title}</h3>
                   </div>
                 </div>
               )

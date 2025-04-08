@@ -105,7 +105,7 @@ export async function GET(req: NextRequest) {
         },
       });
 
-      const current = await prisma.currentStream.findFirst({
+      const currentStream = await prisma.currentStream.findFirst({
         where: { creatorId },
         include: {
           stream: true,
@@ -118,7 +118,7 @@ export async function GET(req: NextRequest) {
           upvotes: _count.upvote,
           haveVoted: upvote.length > 0,
         })),
-        current
+        current : currentStream?.stream
       },
 
     );

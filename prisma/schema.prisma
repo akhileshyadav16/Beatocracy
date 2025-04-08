@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,50 +8,48 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  email     String
-  stream    Stream[]
-  upvote    Upvote[]
-  currentStream  CurrentStream[]
+  id            String          @id @default(uuid())
+  email         String
+  currentStream CurrentStream[]
+  stream        Stream[]
+  upvote        Upvote[]
 }
 
-
 model Stream {
-  id          String  @id @default(uuid())
-  type        StreamType
-  active      Boolean  @default(true)
-  upvotes     Int      @default(0)
-  userId      String
-  url         String
-  title       String?
-  bigImage    String?
-  smallImage  String?
-  extractedId String
-  user        User  @relation(fields: [userId], references: [id])
-  upvote      Upvote[]
-  currentStream  CurrentStream[]
+  id            String          @id @default(uuid())
+  type          StreamType
+  active        Boolean         @default(true)
+  upvotes       Int             @default(0)
+  userId        String
+  extractedId   String
+  url           String
+  bigImage      String?
+  smallImage    String?
+  title         String?
+  currentStream CurrentStream[]
+  user          User            @relation(fields: [userId], references: [id])
+  upvote        Upvote[]
+}
 
+model Upvote {
+  id       String @id @default(uuid())
+  userId   String
+  streamId String
+  stream   Stream @relation(fields: [streamId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, streamId])
+}
+
+model CurrentStream {
+  id        String @id @default(uuid())
+  creatorId String
+  StreamId  String
+  stream    Stream @relation(fields: [StreamId], references: [id])
+  creator   User   @relation(fields: [creatorId], references: [id])
 }
 
 enum StreamType {
   Spotify
   Youtube
-}
-
-model Upvote {
-  id          String  @id @default(uuid())
-  userId      String
-  streamId    String
-  user User   @relation(fields: [userId],references: [id])
-  stream      Stream @relation(fields: [streamId],references: [id])
-  @@unique([userId,streamId])
-}
-
-
-model CurrentStream {
-  id          String @id  @default(uuid())
-  creatorId   String
-  StreamId    String
-  creator     User   @relation(fields: [creatorId],references: [id])
-  stream      Stream @relation(fields: [StreamId],references: [id])
 }
