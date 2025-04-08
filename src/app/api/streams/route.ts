@@ -38,7 +38,7 @@ export async function POST(req:NextRequest){
 
     
     const videoData = await youtubesearchapi.GetVideoDetails(extractedId);
-    const videoThumbnail = videoData.thumbnail.thumbnails.sort(
+    const videoThumbnail = videoData?.thumbnail?.thumbnails.sort(
         (a: { width: number }, b: { width: number }) => a.width - b.width
       ).reverse();
       

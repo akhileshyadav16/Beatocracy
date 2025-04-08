@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 interface VideoItem {
   id: string;
   title: string | null;
-  thumbnail: string | null;
   votes: number;
   url: string;
   haveVoted: boolean;
@@ -52,7 +51,6 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
         const formattedQueue = data.streams.map((stream: VideoItem) => ({
           id: stream.id,
           title: stream.title || `YouTube Video ${stream.extractedId}`,
-          thumbnail: stream.smallImage || `https://img.youtube.com/vi/$${stream.extractedId}/mqdefault.jpg`,
           votes: stream.upvotes || 0,
           url: stream.url,
           haveVoted: stream.haveVoted,
@@ -355,7 +353,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
                     )}
                   </div>
                   <img
-                    src={video.thumbnail || "/placeholder.svg"}
+                    src={video.smallImage || "/placeholder.svg"}
                     alt={video.title || "Video"}
                     className="w-24 h-18 object-cover rounded"
                   />
