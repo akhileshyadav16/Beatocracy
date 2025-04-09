@@ -38,7 +38,6 @@ export async function POST(req:NextRequest){
 
     
     const videoData = await youtubesearchapi.GetVideoDetails(extractedId);
-    console.log(videoData);
     const videoThumbnail = await  videoData?.thumbnail?.thumbnails.sort(
         (a: { width: number }, b: { width: number }) => a.width - b.width
       ).reverse();
@@ -51,8 +50,8 @@ export async function POST(req:NextRequest){
         extractedId: extractedId,
         type: type,
         title : videoData.title,
-        bigImage : videoThumbnail?.[0].url || "" ,
-        smallImage : videoThumbnail?.[1].url || "",
+        bigImage :  `https://img.youtube.com/vi/${extractedId}/maxresdefault.jpg` ,
+        smallImage : `https://img.youtube.com/vi/${extractedId}/hqdefault.jpg`,
         upvotes : 0
       },
     });
