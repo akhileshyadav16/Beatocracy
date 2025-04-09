@@ -31,7 +31,7 @@ export default function Home() {
           <span className="w-fit mx-auto h-fit py-2 bg-clip-text text-sky-300 text-4xl md:text-5xl font-bold">Music Powered by Listeners</span>
           <p className="text-xl font-medium  py-2 text-slate-400 w-fit mx-auto h-fit ">Create streams as a creator or vote on songs as a listener. The most popular songs play first.</p>
           <div className="flex gap-10 text-sky-300 mt-10 pt-5 justify-center">
-            <button  className="w-fit h-12 px-5 py-2  rounded-sm border-2 border-slate-700 bg-gradient-to-b from-slate-950  to-slate-900 cursor-pointer">
+            <button  className="w-fit h-12 px-2 sm:px-5 py-2  rounded-sm border-2 border-slate-700 bg-gradient-to-b from-slate-950  to-slate-900 cursor-pointer">
             <Link href={"/dashboard"}>Become a creator</Link>
             </button>
             <button className="w-fit h-12 px-5 py-2 cursor-pointer rounded-sm border-2 border-slate-700 bg-gradient-to-b from-slate-950  to-slate-900">
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-10 w-11/12 sm:w-4/5 md:w-2/3 mx-auto py-10">
-          <div className="w-fit mx-auto h-fit py-2 bg-clip-text text-sky-300 text-5xl font-bold">
+          <div className="w-fit mx-auto h-fit py-2 bg-clip-text text-sky-300 text-4xl md:text-5xl font-bold">
             Key Features
           </div>
           <p className="text-xl font-medium py-4  w-fit mx-auto h-fit text-slate-400 ">
