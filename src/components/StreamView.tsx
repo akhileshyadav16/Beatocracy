@@ -257,9 +257,9 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
   };
 
   return (
-    <div className="w-screen text-center py-10 min-h-screen bg-gradient-to-t text-slate-300 from-slate-800 via-slate-900 to-slate-950">
+    <div className="w-screen text-center py-10 min-h-screen text-slate-300 bg-gradient-to-b from-slate-950  to-slate-900">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl text-sky-300 font-bold mb-8">Community Music Stream</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl text-sky-300 font-bold mb-8">Community Music Stream</h1>
 
         <div className="mb-8 max-w-xl mx-auto">
           <form onSubmit={handleSubmitYoutubeUrl} className="flex gap-2 mb-6">
@@ -267,13 +267,13 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
               type="text"
               value={youtubeUrl}
               onChange={(e) => setYoutubeUrl(e.target.value)}
-              placeholder="Enter YouTube URL"
+              placeholder="Enter YouTube Song URL"
               className="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-sky-400"
               disabled={isSubmitting}
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-sky-600 hover:bg-sky-500 rounded-lg font-medium disabled:opacity-50"
+              className="px-4 py-2 bg-blue-600 hover:bg-sky-500 rounded-lg font-medium disabled:opacity-50"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Adding..." : "Add Video"}
@@ -283,14 +283,14 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
 
         <button
           onClick={handleShareLink}
-          className="px-4 my-4 cursor-pointer font-medium py-1 w-fit h-10 bg-sky-600 duration-200 hover:bg-sky-500 rounded-md"
+          className="px-4 my-4 cursor-pointer font-medium py-1 w-full sm:w-fit h-10 bg-blue-600 duration-200 hover:bg-blue-700 rounded-md"
         >
           Copy and Share
           <FaShareSquare className="inline w-5 h-5 ml-2 " />
         </button>
 
         <div className="my-10 flex flex-col items-center w-full">
-          <h2 className="text-3xl text-center text-slate-400 font-bold mb-4">Now Playing</h2>
+          <h2 className="text-3xl sm:text-4xl text-center text-slate-400 font-semibold sm:font-bold mb-4">Now Playing</h2>
           <div className="w-full rounded-lg flex justify-center">
             {currentVideo ? (
               path === "/dashboard" ? (
@@ -305,7 +305,7 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
                   onEnd={handleVideoEnd}
                 />
               ) : (
-                <div key={currentStream?.id} className="flex flex-col w-2/5 items-center gap-4 bg-slate-950 p-3 rounded-lg">
+                <div key={currentStream?.id} className="flex flex-col w-full sm:w-1/2 md:w-2/5 items-center gap-4 bg-gradient-to-b from-slate-950  to-slate-900 p-3 rounded-lg">
                   <img
                     src={currentStream?.bigImage || "/placeholder.svg"}
                     alt={currentStream?.title || "Video"}
@@ -324,11 +324,11 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
         </div>
 
         <div className="mt-20 py-4">
-          <h2 className="text-2xl font-semibold mb-4">Up Next</h2>
+          <h2 className="text-3xl sm:text-4xl font-semibold sm:font-bold mb-4">Up Next</h2>
           {queue.length > 0 ? (
             <ul className="max-w-2xl mx-auto space-y-3">
               {queue.map((video) => (
-                <li key={video.id} className="flex items-center gap-4 bg-slate-900 p-3 rounded-lg">
+                <li key={video.id} className="flex items-center gap-4 bg-gradient-to-b from-slate-950  to-slate-900 p-3 rounded-lg">
                   <div className="flex items-center gap-1 min-w-[60px]">
                     {!video.haveVoted ? (
                       <>
