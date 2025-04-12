@@ -281,13 +281,18 @@ export default function StreamView({ creatorId }: { creatorId: string }) {
           </form>
         </div>
 
-        <button
-          onClick={handleShareLink}
-          className="px-4 my-4 cursor-pointer font-medium py-1 w-full sm:w-fit h-10 bg-blue-600 duration-200 hover:bg-blue-700 rounded-md"
-        >
-          Copy and Share
-          <FaShareSquare className="inline w-5 h-5 ml-2 " />
-        </button>
+        {
+          path === "/dashboard" && (
+            <button
+              onClick={handleShareLink}
+              className="px-4 my-4 cursor-pointer font-medium py-1 w-full sm:w-fit h-10 bg-blue-600 duration-200 hover:bg-blue-700 rounded-md"
+             >
+              Copy and Share
+              <FaShareSquare className="inline w-5 h-5 ml-2 " />
+            </button>
+          ) 
+
+        }
 
         <div className="my-10 flex flex-col items-center w-full">
           <h2 className="text-3xl sm:text-4xl text-center text-slate-400 font-semibold sm:font-bold mb-4">Now Playing</h2>
